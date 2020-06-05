@@ -65,7 +65,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = $this->repository->with('category')->where('id', $id)->first();
+        // $product = $this->repository->where('id', $id)->first();
+        $product = $this->repository->findWhereFirst('id', $id);
 
         if (!$product)
             return redirect()->back();
@@ -81,7 +82,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        if (!$product = $this->repository->find($id))
+        if (!$product = $this->repository->findById($id))
             return redirect()->back();
 
         return view('admin.products.edit', compact('product', 'categories'));
@@ -96,9 +97,8 @@ class ProductController extends Controller
      */
     public function update(StoreUpdateProductFormRequest $request, $id)
     {
-        $this->repository
-            ->find($id)
-            ->update($request->all());
+        // $this->repository->find($id)
+        $this->repository->update($id, $request->all());
 
         return redirect()
             ->route('products.index')
@@ -113,7 +113,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $this->repository->find($id)->delete();
+        $this->repository->delete($id);
 
         return redirect()
             ->route('products.index')

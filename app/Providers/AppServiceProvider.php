@@ -5,8 +5,6 @@ namespace App\Providers;
 use App\Models\Category;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\Contracts\ProductRepositoryInterface;
-use App\Repositories\Core\Eloquent\EloquentProductRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,6 +32,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(ProductRepositoryInterface::class, EloquentProductRepository::class);
+        //
     }
 }
