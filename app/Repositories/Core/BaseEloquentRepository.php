@@ -3,7 +3,7 @@
 namespace App\Repositories\Core;
 
 use App\Repositories\Exceptions\NotEntityDefined;
-use App\Repository\Contracts\RepositoryInterface;
+use App\Repositories\Contracts\RepositoryInterface;
 
 class BaseEloquentRepository implements RepositoryInterface
 {
@@ -62,6 +62,6 @@ class BaseEloquentRepository implements RepositoryInterface
             throw new NotEntityDefined;
         }
 
-        return app()->make($this->entity);
+        return app()->make($this->entity());
     }
 }
