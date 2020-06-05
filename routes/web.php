@@ -3,8 +3,7 @@
 $this->any('admin/products/search', 'Admin\ProductController@search')->name('products.search');
 $this->resource('admin/products', 'Admin\ProductController');
 
-Route::get('admin', function () {
-})->name('admin');
+Route::get('admin', 'HomeController@index')->name('admin');
 
 Route::any('admin/categories/search', 'Admin\CategoryController@search')->name('categories.search');
 Route::resource('admin/categories', 'Admin\CategoryController');
