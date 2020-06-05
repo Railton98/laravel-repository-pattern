@@ -1,0 +1,50 @@
+# v3 syntax
+version: "3"
+
+# Named volumes
+volumes:
+  # MySQL Data
+  repositories-mysql-data:
+    driver: local
+
+services:
+  # MySQL (5.7)
+  db:
+    image: mysql:5.7
+    container_name: repositories-mysql
+    volumes:
+      - repositories-mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=repositories
+      - MYSQL_DATABASE=repositories
+      - MYSQL_USER=repositories
+      - MYSQL_PASSWORD=repositories
+  # PHP (with Nginx)
+  app:
+    image: ambientum/php:7.2-nginx
+    container_name: repositories-app
+    depends_on:
+      - db
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "80:8080"
+    links:
+      - db
+  # PHPMYADMIN
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: repositories-phpmyadmin
+    depends_on:
+      - db
+    links:
+      - db
+    ports:
+      - "81:80"
+    environment:
+      - PMA_HOST=db
+      - MYSQL_ROOT_PASSWORD=repositories
+      - MYSQL_USER=repositories
+      - MYSQL_PASSWORD=repositories
