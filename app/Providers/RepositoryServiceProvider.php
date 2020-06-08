@@ -5,10 +5,12 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Contracts\{
     CategoryRepositoryInterface,
+    ChartRepositoryInterface,
     ProductRepositoryInterface
 };
 use App\Repositories\Core\Eloquent\{
     EloquentCategoryRepository,
+    EloquentChartRepository,
     EloquentProductRepository
 };
 use App\Repositories\Core\QueryBuilder\{
@@ -43,6 +45,11 @@ class RepositoryServiceProvider extends ServiceProvider
             CategoryRepositoryInterface::class,
             QueryBuilderCategoryRepository::class
             // EloquentCategoryRepository::class
+        );
+
+        $this->app->bind(
+            ChartRepositoryInterface::class,
+            EloquentChartRepository::class
         );
     }
 }
