@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StoreUpdateCategoryFormRequest;
-use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
@@ -23,7 +22,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this->repository->paginate();
+        $categories = $this->repository
+            ->orderBy('title', 'ASC')
+            ->paginate();
 
         return view('admin.categories.index', compact('categories'));
     }

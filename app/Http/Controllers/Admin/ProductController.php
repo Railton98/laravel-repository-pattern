@@ -24,6 +24,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->repository
+            ->orderBy('id')
             ->relationships('category')
             ->paginate();
 

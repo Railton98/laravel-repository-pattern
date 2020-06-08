@@ -41,8 +41,8 @@ class RepositoryServiceProvider extends ServiceProvider
 
         $this->app->bind(
             CategoryRepositoryInterface::class,
-            // QueryBuilderCategoryRepository::class
-            EloquentCategoryRepository::class
+            QueryBuilderCategoryRepository::class
+            // EloquentCategoryRepository::class
         );
     }
 }
