@@ -8,6 +8,7 @@ use App\Repositories\Contracts\{
     ProductRepositoryInterface
 };
 use App\Repositories\Core\Eloquent\{
+    EloquentCategoryRepository,
     EloquentProductRepository
 };
 use App\Repositories\Core\QueryBuilder\{
@@ -33,7 +34,15 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(ProductRepositoryInterface::class, EloquentProductRepository::class);
-        $this->app->bind(CategoryRepositoryInterface::class, QueryBuilderCategoryRepository::class);
+        $this->app->bind(
+            ProductRepositoryInterface::class,
+            EloquentProductRepository::class
+        );
+
+        $this->app->bind(
+            CategoryRepositoryInterface::class,
+            // QueryBuilderCategoryRepository::class
+            EloquentCategoryRepository::class
+        );
     }
 }
