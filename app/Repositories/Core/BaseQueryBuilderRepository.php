@@ -9,8 +9,7 @@ use App\Repositories\Exceptions\PropertyTableNotExists;
 
 class BaseQueryBuilderRepository implements RepositoryInterface
 {
-    private $db;
-    protected $tb;
+    protected $tb, $db;
     protected $orderBy = [
         'column'    => 'id',
         'order'     => 'DESC'

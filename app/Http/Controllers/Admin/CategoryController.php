@@ -49,7 +49,7 @@ class CategoryController extends Controller
     {
         $this->repository->store([
             'title'         => $request->title,
-            'url'           => $request->url,
+            // 'url'           => $request->url,
             'description'   => $request->description,
         ]);
 
@@ -101,7 +101,7 @@ class CategoryController extends Controller
     {
         $this->repository->update($id, [
             'title'         => $request->title,
-            'url'           => $request->url,
+            // 'url'           => $request->url,
             'description'   => $request->description,
         ]);
 
