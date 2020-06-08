@@ -56,6 +56,13 @@ class BaseEloquentRepository implements RepositoryInterface
         return $this->entity->find($id)->delete();
     }
 
+    public function relationships(...$relationships)
+    {
+        $this->entity = $this->entity->with($relationships);
+
+        return $this;
+    }
+
     public function resolveEntity()
     {
         if (!method_exists($this, 'entity')) {
