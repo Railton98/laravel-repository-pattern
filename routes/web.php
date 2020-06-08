@@ -9,6 +9,8 @@ $this->group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     $this->any('categories/search', 'CategoryController@search')->name('categories.search');
     $this->resource('categories', 'CategoryController');
+
+    $this->get('/', 'DashboardController@index')->name('home');
 });
 
 $this->get('/', function () {
@@ -17,5 +19,3 @@ $this->get('/', function () {
 
 
 Auth::routes(['register' => false]);
-
-Route::get('/home', 'HomeController@index')->name('home');
