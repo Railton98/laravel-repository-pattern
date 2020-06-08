@@ -1,16 +1,20 @@
 <?php
 
-$this->any('admin/products/search', 'Admin\ProductController@search')->name('products.search');
-$this->resource('admin/products', 'Admin\ProductController');
+$this->group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
+    $this->view('/', 'home')->name('admin');
 
-Route::get('admin', 'HomeController@index')->name('admin');
+    $this->any('products/search', 'ProductController@search')->name('products.search');
+    $this->resource('products', 'ProductController');
 
-Route::any('admin/categories/search', 'Admin\CategoryController@search')->name('categories.search');
-Route::resource('admin/categories', 'Admin\CategoryController');
 
-Route::get('/', function () {
+    $this->any('categories/search', 'CategoryController@search')->name('categories.search');
+    $this->resource('categories', 'CategoryController');
+});
+
+$this->get('/', function () {
     return view('welcome');
 });
+
 
 Auth::routes();
 
