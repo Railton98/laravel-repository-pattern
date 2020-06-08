@@ -125,26 +125,7 @@ class ProductController extends Controller
     {
         $filters = $request->except('_token');
 
-        $products = $this->repository
-            ->with('category')
-            ->where(function ($query) use ($request) {
-                if ($request->name) {
-                    $filter = $request->name;
-                    $query->where(function ($querySub) use ($filter) {
-                        $querySub->where('name', 'LIKE', "%{$filter}%")
-                            ->orWhere('description', 'LIKE', "%{$filter}%");
-                    });
-                }
-
-                if ($request->price) {
-                    $query->where('price', $request->price);
-                }
-
-                if ($request->category) {
-                    $query->orWhere('category_id', $request->category);
-                }
-            })
-            ->paginate();
+        $products = $this->repository->search($request);
 
         return view('admin.products.index', compact('products', 'filters'));
     }
